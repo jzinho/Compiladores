@@ -1,0 +1,57 @@
+Package compilador ; 
+     
+Helpers
+   any_char      = [0x0 .. 0xfff];
+   digito        = ['0' .. '9'];
+   letra       = [['a' .. 'z'] + ['A' .. 'Z']];
+   id = letra letra*;
+   num = digito digito*;
+   cr  = 13;
+   lf  = 10;
+   tab = 9;
+   eol = cr lf | cr | lf;
+   branco = tab | ' ';
+   //integer = digito; 
+   not_star = [any_char - '*'];
+   not_star_slash = [not_star - '/'];
+   
+  
+Tokens 
+   //Identificadores
+  blank   = branco;
+  string = 'string';
+  int = 'int';
+  comment_line = '//'[any_char - [lf + cr]]*;
+  comment_block = '/*' not_star* '*'+ (not_star_slash not_star* '*'+)* '/';
+  if ='if';
+  else ='else';
+  return = 'return';
+  void = 'void';
+  while = 'while';
+  
+  //Símbolos
+  open_brace = '{';
+  close_brace = '}';
+  lsbrack = '[';
+  rsbrack = ']';
+  lpar = '(';
+  rpar = ')';
+  comma  = ',';
+  scolon   = ';';
+  atrib = ':=';
+  colon = ':';
+  div = '/';
+  plus  = '+';
+  minus = '-';
+  times = '*';
+  mod = '%';
+  greater = '>';
+  less = '<';
+  gequal = '>=';
+  lequal = '<=';
+  not = '!';
+  and = 'and';
+  or = 'or';
+  xor = 'xor';
+  diff   = '!=';
+  equal    = '=';
