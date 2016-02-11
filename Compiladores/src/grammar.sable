@@ -10,7 +10,7 @@ Helpers
    lf  = 10;
    tab = 9;
    eol = cr lf | cr | lf;
-   branco = tab | ' ';
+   branco = (' ' | tab | eol)+;
    //integer = digito; 
    not_star = [any_char - '*'];
    not_star_slash = [not_star - '/'];
@@ -55,3 +55,9 @@ Tokens
   xor = 'xor';
   diff   = '!=';
   equal    = '=';
+  identifier = letra ( digito | letra )*;
+    
+Ignored Tokens
+comment_line,
+blank,
+comment_block;

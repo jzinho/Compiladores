@@ -20,7 +20,7 @@ public interface Analysis extends Switch
     void caseTElse(TElse node);
     void caseTReturn(TReturn node);
     void caseTVoid(TVoid node);
-    void caseTMain(TMain node);
+    void caseTWhile(TWhile node);
     void caseTOpenBrace(TOpenBrace node);
     void caseTCloseBrace(TCloseBrace node);
     void caseTLsbrack(TLsbrack node);
@@ -46,6 +46,7 @@ public interface Analysis extends Switch
     void caseTXor(TXor node);
     void caseTDiff(TDiff node);
     void caseTEqual(TEqual node);
+    void caseTIdentifier(TIdentifier node);
     void caseEOF(EOF node);
     void caseInvalidToken(InvalidToken node);
 }

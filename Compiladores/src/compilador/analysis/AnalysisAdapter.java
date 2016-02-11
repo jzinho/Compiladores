@@ -123,7 +123,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTMain(TMain node)
+    public void caseTWhile(TWhile node)
     {
         defaultCase(node);
     }
@@ -274,6 +274,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTEqual(TEqual node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTIdentifier(TIdentifier node)
     {
         defaultCase(node);
     }
