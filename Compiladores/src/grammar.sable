@@ -21,6 +21,7 @@ Tokens
   blank   = branco;
   string = 'string';
   int = 'int';
+  integer_number = digito;
   comment_line = '//'[any_char - [lf + cr]]*;
   comment_block = '/*' not_star* '*'+ (not_star_slash not_star* '*'+)* '/';
   if ='if';
