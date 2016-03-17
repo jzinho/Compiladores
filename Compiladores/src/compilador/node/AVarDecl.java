@@ -8,7 +8,7 @@ import compilador.analysis.*;
 public final class AVarDecl extends PVarDecl
 {
     private PTypeDecl _typeDecl_;
-    private TTId _tId_;
+    private PVarDeclId _varDeclId_;
 
     public AVarDecl()
     {
@@ -17,12 +17,12 @@ public final class AVarDecl extends PVarDecl
 
     public AVarDecl(
         @SuppressWarnings("hiding") PTypeDecl _typeDecl_,
-        @SuppressWarnings("hiding") TTId _tId_)
+        @SuppressWarnings("hiding") PVarDeclId _varDeclId_)
     {
         // Constructor
         setTypeDecl(_typeDecl_);
 
-        setTId(_tId_);
+        setVarDeclId(_varDeclId_);
 
     }
 
@@ -31,7 +31,7 @@ public final class AVarDecl extends PVarDecl
     {
         return new AVarDecl(
             cloneNode(this._typeDecl_),
-            cloneNode(this._tId_));
+            cloneNode(this._varDeclId_));
     }
 
     @Override
@@ -65,16 +65,16 @@ public final class AVarDecl extends PVarDecl
         this._typeDecl_ = node;
     }
 
-    public TTId getTId()
+    public PVarDeclId getVarDeclId()
     {
-        return this._tId_;
+        return this._varDeclId_;
     }
 
-    public void setTId(TTId node)
+    public void setVarDeclId(PVarDeclId node)
     {
-        if(this._tId_ != null)
+        if(this._varDeclId_ != null)
         {
-            this._tId_.parent(null);
+            this._varDeclId_.parent(null);
         }
 
         if(node != null)
@@ -87,7 +87,7 @@ public final class AVarDecl extends PVarDecl
             node.parent(this);
         }
 
-        this._tId_ = node;
+        this._varDeclId_ = node;
     }
 
     @Override
@@ -95,7 +95,7 @@ public final class AVarDecl extends PVarDecl
     {
         return ""
             + toString(this._typeDecl_)
-            + toString(this._tId_);
+            + toString(this._varDeclId_);
     }
 
     @Override
@@ -108,9 +108,9 @@ public final class AVarDecl extends PVarDecl
             return;
         }
 
-        if(this._tId_ == child)
+        if(this._varDeclId_ == child)
         {
-            this._tId_ = null;
+            this._varDeclId_ = null;
             return;
         }
 
@@ -127,9 +127,9 @@ public final class AVarDecl extends PVarDecl
             return;
         }
 
-        if(this._tId_ == oldChild)
+        if(this._varDeclId_ == oldChild)
         {
-            setTId((TTId) newChild);
+            setVarDeclId((PVarDeclId) newChild);
             return;
         }
 

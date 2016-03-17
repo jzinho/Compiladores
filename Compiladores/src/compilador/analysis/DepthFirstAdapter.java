@@ -124,6 +124,27 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAVarDeclDecl(node);
     }
 
+    public void inAFunDeclDecl(AFunDeclDecl node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAFunDeclDecl(AFunDeclDecl node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAFunDeclDecl(AFunDeclDecl node)
+    {
+        inAFunDeclDecl(node);
+        if(node.getFunDecl() != null)
+        {
+            node.getFunDecl().apply(this);
+        }
+        outAFunDeclDecl(node);
+    }
+
     public void inAVarDecl(AVarDecl node)
     {
         defaultIn(node);
@@ -142,9 +163,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getTypeDecl().apply(this);
         }
-        if(node.getTId() != null)
+        if(node.getVarDeclId() != null)
         {
-            node.getTId().apply(this);
+            node.getVarDeclId().apply(this);
         }
         outAVarDecl(node);
     }
@@ -191,25 +212,226 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAVoidTypeDecl(node);
     }
 
-    public void inAVarDeclId(AVarDeclId node)
+    public void inATIdVarDeclId(ATIdVarDeclId node)
     {
         defaultIn(node);
     }
 
-    public void outAVarDeclId(AVarDeclId node)
+    public void outATIdVarDeclId(ATIdVarDeclId node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAVarDeclId(AVarDeclId node)
+    public void caseATIdVarDeclId(ATIdVarDeclId node)
     {
-        inAVarDeclId(node);
+        inATIdVarDeclId(node);
         if(node.getTId() != null)
         {
             node.getTId().apply(this);
         }
-        outAVarDeclId(node);
+        outATIdVarDeclId(node);
+    }
+
+    public void inAVarDecl2VarDeclId(AVarDecl2VarDeclId node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAVarDecl2VarDeclId(AVarDecl2VarDeclId node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAVarDecl2VarDeclId(AVarDecl2VarDeclId node)
+    {
+        inAVarDecl2VarDeclId(node);
+        if(node.getVarDecl2() != null)
+        {
+            node.getVarDecl2().apply(this);
+        }
+        outAVarDecl2VarDeclId(node);
+    }
+
+    public void inAVarDecl2(AVarDecl2 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAVarDecl2(AVarDecl2 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAVarDecl2(AVarDecl2 node)
+    {
+        inAVarDecl2(node);
+        if(node.getTId() != null)
+        {
+            node.getTId().apply(this);
+        }
+        if(node.getLsbrack() != null)
+        {
+            node.getLsbrack().apply(this);
+        }
+        if(node.getTNum() != null)
+        {
+            node.getTNum().apply(this);
+        }
+        if(node.getRsbrack() != null)
+        {
+            node.getRsbrack().apply(this);
+        }
+        outAVarDecl2(node);
+    }
+
+    public void inAFunDecl(AFunDecl node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAFunDecl(AFunDecl node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAFunDecl(AFunDecl node)
+    {
+        inAFunDecl(node);
+        if(node.getTNum() != null)
+        {
+            node.getTNum().apply(this);
+        }
+        outAFunDecl(node);
+    }
+
+    public void inADiffCompOp(ADiffCompOp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outADiffCompOp(ADiffCompOp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseADiffCompOp(ADiffCompOp node)
+    {
+        inADiffCompOp(node);
+        if(node.getDiff() != null)
+        {
+            node.getDiff().apply(this);
+        }
+        outADiffCompOp(node);
+    }
+
+    public void inAEqualCompOp(AEqualCompOp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAEqualCompOp(AEqualCompOp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAEqualCompOp(AEqualCompOp node)
+    {
+        inAEqualCompOp(node);
+        if(node.getEqual() != null)
+        {
+            node.getEqual().apply(this);
+        }
+        outAEqualCompOp(node);
+    }
+
+    public void inAGreaterCompOp(AGreaterCompOp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAGreaterCompOp(AGreaterCompOp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAGreaterCompOp(AGreaterCompOp node)
+    {
+        inAGreaterCompOp(node);
+        if(node.getGreater() != null)
+        {
+            node.getGreater().apply(this);
+        }
+        outAGreaterCompOp(node);
+    }
+
+    public void inALessCompOp(ALessCompOp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALessCompOp(ALessCompOp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALessCompOp(ALessCompOp node)
+    {
+        inALessCompOp(node);
+        if(node.getLess() != null)
+        {
+            node.getLess().apply(this);
+        }
+        outALessCompOp(node);
+    }
+
+    public void inAGequalCompOp(AGequalCompOp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAGequalCompOp(AGequalCompOp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAGequalCompOp(AGequalCompOp node)
+    {
+        inAGequalCompOp(node);
+        if(node.getGequal() != null)
+        {
+            node.getGequal().apply(this);
+        }
+        outAGequalCompOp(node);
+    }
+
+    public void inALequalCompOp(ALequalCompOp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALequalCompOp(ALequalCompOp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALequalCompOp(ALequalCompOp node)
+    {
+        inALequalCompOp(node);
+        if(node.getLequal() != null)
+        {
+            node.getLequal().apply(this);
+        }
+        outALequalCompOp(node);
     }
 
     public void inAPlusAddOp(APlusAddOp node)

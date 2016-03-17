@@ -99,6 +99,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAFunDeclDecl(AFunDeclDecl node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAVarDecl(AVarDecl node)
     {
         defaultCase(node);
@@ -117,7 +123,61 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAVarDeclId(AVarDeclId node)
+    public void caseATIdVarDeclId(ATIdVarDeclId node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVarDecl2VarDeclId(AVarDecl2VarDeclId node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVarDecl2(AVarDecl2 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAFunDecl(AFunDecl node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADiffCompOp(ADiffCompOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEqualCompOp(AEqualCompOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAGreaterCompOp(AGreaterCompOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALessCompOp(ALessCompOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAGequalCompOp(AGequalCompOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALequalCompOp(ALequalCompOp node)
     {
         defaultCase(node);
     }

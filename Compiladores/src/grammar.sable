@@ -67,12 +67,30 @@ comment_block;
 
 Productions
 
-program = {decl_list} decl_list;
-decl_list = decl_list decl| {decl} decl;
-decl = {var_decl} var_decl;
-var_decl = type_decl t_id  ;
-type_decl = {int} integer_number | {void} void;
-var_decl_id = t_id;
+program = {decl_list} decl_list; //  Início
+
+decl_list = decl_list decl| {decl} decl;  // int a OU int[a]
+
+decl = {var_decl} var_decl | {fun_decl} fun_decl;  // declara variável ou função
+
+var_decl = type_decl var_decl_id  ;
+type_decl = {int} integer_number | {void} void; //Apenas void e INT
+var_decl_id = {t_id} t_id | {var_decl2} var_decl2;
+var_decl2 = t_id lsbrack t_num rsbrack;
+//Falta implementar fun_decl;
+fun_decl = t_num;
+
+
+
+
+
+
+
+
+comp_op = {diff} diff | {equal} equal | {greater} greater | {less} less 
+| {gequal}gequal |{lequal} lequal;
 
 add_op =  {plus} plus | {minus} minus ;
+
 mult_op = {times} times |  {div} div ;
+
