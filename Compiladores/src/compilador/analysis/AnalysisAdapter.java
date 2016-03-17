@@ -69,6 +69,84 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseStart(Start node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADeclListProgram(ADeclListProgram node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADeclList(ADeclList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADeclDeclList(ADeclDeclList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVarDeclDecl(AVarDeclDecl node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVarDecl(AVarDecl node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIntTypeDecl(AIntTypeDecl node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVoidTypeDecl(AVoidTypeDecl node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVarDeclId(AVarDeclId node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAPlusAddOp(APlusAddOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMinusAddOp(AMinusAddOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATimesMultOp(ATimesMultOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADivMultOp(ADivMultOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTBlank(TBlank node)
     {
         defaultCase(node);
@@ -88,6 +166,18 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTIntegerNumber(TIntegerNumber node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTTId(TTId node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTTNum(TTNum node)
     {
         defaultCase(node);
     }

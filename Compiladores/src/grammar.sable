@@ -22,6 +22,8 @@ Tokens
   string = 'string';
   int = 'int';
   integer_number = digito;
+  t_id = id;
+  t_num = num;
   comment_line = '//'[any_char - [lf + cr]]*;
   comment_block = '/*' not_star* '*'+ (not_star_slash not_star* '*'+)* '/';
   if ='if';
@@ -62,3 +64,15 @@ Ignored Tokens
 comment_line,
 blank,
 comment_block;
+
+Productions
+
+program = {decl_list} decl_list;
+decl_list = decl_list decl| {decl} decl;
+decl = {var_decl} var_decl;
+var_decl = type_decl t_id  ;
+type_decl = {int} integer_number | {void} void;
+var_decl_id = t_id;
+
+add_op =  {plus} plus | {minus} minus ;
+mult_op = {times} times |  {div} div ;
