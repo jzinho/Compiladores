@@ -8,7 +8,9 @@ import java.io.PushbackReader;
 import compilador.lexer.Lexer;
 import compilador.lexer.LexerException;
 import compilador.node.*;
-  
+import compilador.parser.Parser;
+import compilador.parser.ParserException;
+
 import java.io.* ; 
   
 public class Main { 
@@ -34,12 +36,16 @@ public class Main {
 		} while(!(flag));
 	
 	}
-	public static void main (String[] args) throws LexerException, IOException{
+	public static void main (String[] args) throws LexerException, IOException, ParserException{
 		//String arquivo = "/src/tester.sa";
 		Lexer lexer = new Lexer (new PushbackReader( 
 	               new FileReader(args[0]), 1024)); 
 		Main main = new Main();
 		
 		main.AnaliseLexica(args[0], lexer);
+		
+		Parser p = new Parser(lexer);
+		Start ast = p.parse();
+        System.out.println("Analise sintática bem sucedida");
 	}
 }

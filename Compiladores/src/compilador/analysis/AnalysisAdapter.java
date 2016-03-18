@@ -123,7 +123,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseATIdVarDeclId(ATIdVarDeclId node)
+    public void caseAIdVarDeclId(AIdVarDeclId node)
     {
         defaultCase(node);
     }
@@ -147,37 +147,193 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseADiffCompOp(ADiffCompOp node)
+    public void caseAExpressionStatement(AExpressionStatement node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAEqualCompOp(AEqualCompOp node)
+    public void caseACompoundStatement(ACompoundStatement node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAGreaterCompOp(AGreaterCompOp node)
+    public void caseASelectionStatement(ASelectionStatement node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseALessCompOp(ALessCompOp node)
+    public void caseAIterationStatement(AIterationStatement node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAGequalCompOp(AGequalCompOp node)
+    public void caseAReturnStatement(AReturnStatement node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseALequalCompOp(ALequalCompOp node)
+    public void caseAExpressionStmt(AExpressionStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAScolonExpressionStmt(AScolonExpressionStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAStatementList(AStatementList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAScolonStatementList(AScolonStatementList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACompoundStmt(ACompoundStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIfSelectionStmt(AIfSelectionStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIterationStmt(AIterationStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAReturn1ReturnStmt(AReturn1ReturnStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAReturn2ReturnStmt(AReturn2ReturnStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAComparationExpression(AComparationExpression node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAddExpression(AAddExpression node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALocalDeclaration(ALocalDeclaration node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAScolonLocalDeclaration(AScolonLocalDeclaration node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAA1SimpleExpression(AA1SimpleExpression node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAA2SimpleExpression(AA2SimpleExpression node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAddExp2(AAddExp2 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAddtermAddExp(AAddtermAddExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATermAddExp(ATermAddExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAScolonTerm(AScolonTerm node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIdVar(AIdVar node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIdcompostoVar(AIdcompostoVar node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADiffRelOp(ADiffRelOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEqualRelOp(AEqualRelOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAGreaterRelOp(AGreaterRelOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALessRelOp(ALessRelOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAGequalRelOp(AGequalRelOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALequalRelOp(ALequalRelOp node)
     {
         defaultCase(node);
     }
@@ -202,6 +358,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseADivMultOp(ADivMultOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAModMultOp(AModMultOp node)
     {
         defaultCase(node);
     }

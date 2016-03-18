@@ -67,30 +67,78 @@ comment_block;
 
 Productions
 
-program = {decl_list} decl_list; //  Início
+program = {decl_list} decl_list;
 
-decl_list = decl_list decl| {decl} decl;  // int a OU int[a]
+decl_list = decl_list decl|
+            {decl} decl;
 
-decl = {var_decl} var_decl | {fun_decl} fun_decl;  // declara variável ou função
+decl = {var_decl} var_decl |
+       {fun_decl} fun_decl;
 
-var_decl = type_decl var_decl_id  ;
-type_decl = {int} integer_number | {void} void; //Apenas void e INT
-var_decl_id = {t_id} t_id | {var_decl2} var_decl2;
+var_decl = type_decl var_decl_id ;
+type_decl = {int} integer_number |
+            {void} void;
+var_decl_id = {id} t_id |
+              {var_decl2} var_decl2;
 var_decl2 = t_id lsbrack t_num rsbrack;
 //Falta implementar fun_decl;
 fun_decl = t_num;
 
 
+//Statement
+
+statement = {expression}expression_stmt |
+            {compound}compound_stmt |
+            {selection}selection_stmt |
+            {iteration}iteration_stmt |
+            {return}return_stmt;
+
+expression_stmt= expression scolon |
+                 {scolon}scolon;
+
+statement_list = statement_list statement |
+                 {scolon} scolon;                 
+                 
+compound_stmt = open_brace local_declaration statement_list close_brace ;         
+
+selection_stmt = {if}if lpar expression rpar statement ;
+                // {ifelse}if lpar expression rpar statement else statement;        
+
+iteration_stmt = while lpar expression statement;
+
+return_stmt =  {return1} return scolon |
+               {return2}return expression;
+
+expression = {comparation} var equal expression |
+             {add}simple_expression;
+
+local_declaration = local_declaration var_decl |
+                     {scolon} scolon;
+
+simple_expression = {a1} add_exp rel_op add_exp2|
+                    {a2} add_exp;
+                    
+add_exp2 = add_exp;                   
+                    
+add_exp = {addterm}add_exp add_op term |
+          {term} term;                  
 
 
+term = {scolon} scolon;
+var = {id}t_id |
+      {idcomposto}t_id lsbrack expression rsbrack;
 
+rel_op = {diff} diff |
+          {equal} equal |
+          {greater} greater |
+          {less} less |
+          {gequal} gequal |
+          {lequal} lequal ;
 
+add_op =  {plus} plus |
+          {minus} minus ;
 
-
-comp_op = {diff} diff | {equal} equal | {greater} greater | {less} less 
-| {gequal}gequal |{lequal} lequal;
-
-add_op =  {plus} plus | {minus} minus ;
-
-mult_op = {times} times |  {div} div ;
+mult_op = {times} times |
+          {div} div |
+          {mod} mod;
 
