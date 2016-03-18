@@ -81,25 +81,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseADeclList(ADeclList node)
+    public void caseASequenceDeclList(ASequenceDeclList node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseADeclDeclList(ADeclDeclList node)
+    public void caseASingleDeclList(ASingleDeclList node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAVarDeclDecl(AVarDeclDecl node)
+    public void caseAVariableDecl(AVariableDecl node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAFunDeclDecl(AFunDeclDecl node)
+    public void caseAFunctionDecl(AFunctionDecl node)
     {
         defaultCase(node);
     }
@@ -129,19 +129,73 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAVarDecl2VarDeclId(AVarDecl2VarDeclId node)
+    public void caseABracksVarDeclId(ABracksVarDeclId node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAVarDecl2(AVarDecl2 node)
+    public void caseATypeFunDecl(ATypeFunDecl node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAFunDecl(AFunDecl node)
+    public void caseANotypeFunDecl(ANotypeFunDecl node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAPListParams(APListParams node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEmptyParams(AEmptyParams node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAPListparamParamList(APListparamParamList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParamParamList(AParamParamList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATypeDeclParamType(ATypeDeclParamType node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIdlistParamIdList(AIdlistParamIdList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParamidParamIdList(AParamidParamIdList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAWithoutParamId(AWithoutParamId node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAWithParamId(AWithParamId node)
     {
         defaultCase(node);
     }
@@ -195,7 +249,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAScolonStatementList(AScolonStatementList node)
+    public void caseAEmptyStatementList(AEmptyStatementList node)
     {
         defaultCase(node);
     }
@@ -208,6 +262,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAIfSelectionStmt(AIfSelectionStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAStatement2(AStatement2 node)
     {
         defaultCase(node);
     }
@@ -249,7 +309,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAScolonLocalDeclaration(AScolonLocalDeclaration node)
+    public void caseAEmptyLocalDeclaration(AEmptyLocalDeclaration node)
     {
         defaultCase(node);
     }
@@ -261,7 +321,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAA2SimpleExpression(AA2SimpleExpression node)
+    public void caseASingleSimpleExpression(ASingleSimpleExpression node)
     {
         defaultCase(node);
     }
@@ -285,19 +345,85 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAScolonTerm(AScolonTerm node)
+    public void caseATermfactorTerm(ATermfactorTerm node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAIdVar(AIdVar node)
+    public void caseAFactorTerm(AFactorTerm node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAIdcompostoVar(AIdcompostoVar node)
+    public void caseAMulFactor(AMulFactor node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAImulFactor(AImulFactor node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseASingleMutable(ASingleMutable node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIdexpressionMutable(AIdexpressionMutable node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpressionImmutable(AExpressionImmutable node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACallImmutable(ACallImmutable node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANumImmutable(ANumImmutable node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACall(ACall node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAArgs(AArgs node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEmptyArgs(AEmptyArgs node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAListargsArgsList(AListargsArgsList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpressionArgsList(AExpressionArgsList node)
     {
         defaultCase(node);
     }
@@ -592,6 +718,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTEqual(TEqual node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEqualequal(TEqualequal node)
     {
         defaultCase(node);
     }

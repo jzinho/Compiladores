@@ -58,6 +58,7 @@ Tokens
   xor = 'xor';
   diff   = '!=';
   equal    = '=';
+  equalequal    = '==';
   identifier = letra ( digito | letra )*;
     
 Ignored Tokens
@@ -69,22 +70,38 @@ Productions
 
 program = {decl_list} decl_list;
 
-decl_list = decl_list decl|
-            {decl} decl;
+decl_list = {sequence}decl_list decl|
+            {single} decl;
 
-decl = {var_decl} var_decl |
-       {fun_decl} fun_decl;
+decl = {variable} var_decl |
+       {function} fun_decl;
 
-var_decl = type_decl var_decl_id ;
+var_decl = type_decl var_decl_id scolon;
+
 type_decl = {int} integer_number |
             {void} void;
+            
 var_decl_id = {id} t_id |
-              {var_decl2} var_decl2;
-var_decl2 = t_id lsbrack t_num rsbrack;
-//Falta implementar fun_decl;
-fun_decl = t_num;
+              {bracks} t_id lsbrack t_num rsbrack;
+              
 
+fun_decl = {type} type_decl t_id lpar params rpar statement |
+           {notype} t_id lpar params rpar statement ;
 
+params = {p_list} param_list |
+         {empty};
+
+param_list= {p_listparam}param_list scolon param_type |
+            {param} param_type ;
+
+param_type = {type_decl} type_decl param_id_list;
+
+param_id_list = {idlist}param_id_list comma param_id |
+                {paramid}param_id;
+
+param_id = {without}t_id |
+           {with}t_id lsbrack rsbrack ;
+           
 //Statement
 
 statement = {expression}expression_stmt |
@@ -97,26 +114,28 @@ expression_stmt= expression scolon |
                  {scolon}scolon;
 
 statement_list = statement_list statement |
-                 {scolon} scolon;                 
+                 {empty};                 
                  
 compound_stmt = open_brace local_declaration statement_list close_brace ;         
 
-selection_stmt = {if}if lpar expression rpar statement ;
-                // {ifelse}if lpar expression rpar statement else statement;        
+selection_stmt = {if}if lpar simple_expression rpar statement  ;
+               //  {ifelse}if lpar simple_expression rpar statement else statement2;
+                 
+statement2 = statement;                         
 
-iteration_stmt = while lpar expression statement;
+iteration_stmt = while lpar simple_expression rpar statement;
 
 return_stmt =  {return1} return scolon |
-               {return2}return expression;
+               {return2}return expression scolon;
 
-expression = {comparation} var equal expression |
+expression = {comparation} mutable equal expression |
              {add}simple_expression;
 
 local_declaration = local_declaration var_decl |
-                     {scolon} scolon;
+                     {empty};
 
 simple_expression = {a1} add_exp rel_op add_exp2|
-                    {a2} add_exp;
+                    {single} add_exp;
                     
 add_exp2 = add_exp;                   
                     
@@ -124,12 +143,29 @@ add_exp = {addterm}add_exp add_op term |
           {term} term;                  
 
 
-term = {scolon} scolon;
-var = {id}t_id |
-      {idcomposto}t_id lsbrack expression rsbrack;
+term = {termfactor}term mult_op factor |
+       {factor}factor;
+       
+factor = {mul}mutable |
+         {imul}immutable;
 
-rel_op = {diff} diff |
-          {equal} equal |
+
+mutable = {single}t_id |
+      {idexpression}t_id lsbrack expression rsbrack;
+      
+immutable = {expression} lpar expression rpar |
+            {call} call| 
+            {num} t_num;      
+      
+call = t_id lpar args rpar;
+
+args = args_list | {empty};
+
+args_list = {listargs}args_list comma expression |
+            {expression}expression;      
+
+rel_op =  {diff} diff |
+          {equal} equalequal |
           {greater} greater |
           {less} less |
           {gequal} gequal |

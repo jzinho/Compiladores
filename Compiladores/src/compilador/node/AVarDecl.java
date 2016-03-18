@@ -9,6 +9,7 @@ public final class AVarDecl extends PVarDecl
 {
     private PTypeDecl _typeDecl_;
     private PVarDeclId _varDeclId_;
+    private TScolon _scolon_;
 
     public AVarDecl()
     {
@@ -17,12 +18,15 @@ public final class AVarDecl extends PVarDecl
 
     public AVarDecl(
         @SuppressWarnings("hiding") PTypeDecl _typeDecl_,
-        @SuppressWarnings("hiding") PVarDeclId _varDeclId_)
+        @SuppressWarnings("hiding") PVarDeclId _varDeclId_,
+        @SuppressWarnings("hiding") TScolon _scolon_)
     {
         // Constructor
         setTypeDecl(_typeDecl_);
 
         setVarDeclId(_varDeclId_);
+
+        setScolon(_scolon_);
 
     }
 
@@ -31,7 +35,8 @@ public final class AVarDecl extends PVarDecl
     {
         return new AVarDecl(
             cloneNode(this._typeDecl_),
-            cloneNode(this._varDeclId_));
+            cloneNode(this._varDeclId_),
+            cloneNode(this._scolon_));
     }
 
     @Override
@@ -90,12 +95,38 @@ public final class AVarDecl extends PVarDecl
         this._varDeclId_ = node;
     }
 
+    public TScolon getScolon()
+    {
+        return this._scolon_;
+    }
+
+    public void setScolon(TScolon node)
+    {
+        if(this._scolon_ != null)
+        {
+            this._scolon_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._scolon_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
             + toString(this._typeDecl_)
-            + toString(this._varDeclId_);
+            + toString(this._varDeclId_)
+            + toString(this._scolon_);
     }
 
     @Override
@@ -111,6 +142,12 @@ public final class AVarDecl extends PVarDecl
         if(this._varDeclId_ == child)
         {
             this._varDeclId_ = null;
+            return;
+        }
+
+        if(this._scolon_ == child)
+        {
+            this._scolon_ = null;
             return;
         }
 
@@ -130,6 +167,12 @@ public final class AVarDecl extends PVarDecl
         if(this._varDeclId_ == oldChild)
         {
             setVarDeclId((PVarDeclId) newChild);
+            return;
+        }
+
+        if(this._scolon_ == oldChild)
+        {
+            setScolon((TScolon) newChild);
             return;
         }
 
