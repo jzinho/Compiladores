@@ -666,6 +666,90 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAReturnStatement(node);
     }
 
+    public void inASelseStatementElse(ASelseStatementElse node)
+    {
+        defaultIn(node);
+    }
+
+    public void outASelseStatementElse(ASelseStatementElse node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseASelseStatementElse(ASelseStatementElse node)
+    {
+        inASelseStatementElse(node);
+        if(node.getSelectionStmtElse() != null)
+        {
+            node.getSelectionStmtElse().apply(this);
+        }
+        outASelseStatementElse(node);
+    }
+
+    public void inAExpressionStatementElse(AExpressionStatementElse node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAExpressionStatementElse(AExpressionStatementElse node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAExpressionStatementElse(AExpressionStatementElse node)
+    {
+        inAExpressionStatementElse(node);
+        if(node.getExpressionStmt() != null)
+        {
+            node.getExpressionStmt().apply(this);
+        }
+        outAExpressionStatementElse(node);
+    }
+
+    public void inAReturnStatementElse(AReturnStatementElse node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAReturnStatementElse(AReturnStatementElse node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAReturnStatementElse(AReturnStatementElse node)
+    {
+        inAReturnStatementElse(node);
+        if(node.getReturnStmt() != null)
+        {
+            node.getReturnStmt().apply(this);
+        }
+        outAReturnStatementElse(node);
+    }
+
+    public void inACompoundStatementElse(ACompoundStatementElse node)
+    {
+        defaultIn(node);
+    }
+
+    public void outACompoundStatementElse(ACompoundStatementElse node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseACompoundStatementElse(ACompoundStatementElse node)
+    {
+        inACompoundStatementElse(node);
+        if(node.getCompoundStmt() != null)
+        {
+            node.getCompoundStmt().apply(this);
+        }
+        outACompoundStatementElse(node);
+    }
+
     public void inAExpressionStmt(AExpressionStmt node)
     {
         defaultIn(node);
@@ -824,25 +908,115 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAIfSelectionStmt(node);
     }
 
-    public void inAStatement2(AStatement2 node)
+    public void inAIfelseSelectionStmt(AIfelseSelectionStmt node)
     {
         defaultIn(node);
     }
 
-    public void outAStatement2(AStatement2 node)
+    public void outAIfelseSelectionStmt(AIfelseSelectionStmt node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAStatement2(AStatement2 node)
+    public void caseAIfelseSelectionStmt(AIfelseSelectionStmt node)
     {
-        inAStatement2(node);
+        inAIfelseSelectionStmt(node);
+        if(node.getIf() != null)
+        {
+            node.getIf().apply(this);
+        }
+        if(node.getLpar() != null)
+        {
+            node.getLpar().apply(this);
+        }
+        if(node.getSimpleExpression() != null)
+        {
+            node.getSimpleExpression().apply(this);
+        }
+        if(node.getRpar() != null)
+        {
+            node.getRpar().apply(this);
+        }
+        if(node.getStatementElse() != null)
+        {
+            node.getStatementElse().apply(this);
+        }
+        if(node.getElse() != null)
+        {
+            node.getElse().apply(this);
+        }
         if(node.getStatement() != null)
         {
             node.getStatement().apply(this);
         }
-        outAStatement2(node);
+        outAIfelseSelectionStmt(node);
+    }
+
+    public void inAIfelseSelectionStmtElse(AIfelseSelectionStmtElse node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAIfelseSelectionStmtElse(AIfelseSelectionStmtElse node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAIfelseSelectionStmtElse(AIfelseSelectionStmtElse node)
+    {
+        inAIfelseSelectionStmtElse(node);
+        if(node.getIf() != null)
+        {
+            node.getIf().apply(this);
+        }
+        if(node.getLpar() != null)
+        {
+            node.getLpar().apply(this);
+        }
+        if(node.getSimpleExpression() != null)
+        {
+            node.getSimpleExpression().apply(this);
+        }
+        if(node.getRpar() != null)
+        {
+            node.getRpar().apply(this);
+        }
+        if(node.getStatementElse() != null)
+        {
+            node.getStatementElse().apply(this);
+        }
+        if(node.getElse() != null)
+        {
+            node.getElse().apply(this);
+        }
+        if(node.getStatementElse2() != null)
+        {
+            node.getStatementElse2().apply(this);
+        }
+        outAIfelseSelectionStmtElse(node);
+    }
+
+    public void inAStatementElse2(AStatementElse2 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAStatementElse2(AStatementElse2 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAStatementElse2(AStatementElse2 node)
+    {
+        inAStatementElse2(node);
+        if(node.getStatementElse() != null)
+        {
+            node.getStatementElse().apply(this);
+        }
+        outAStatementElse2(node);
     }
 
     public void inAIterationStmt(AIterationStmt node)

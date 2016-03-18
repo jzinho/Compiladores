@@ -109,6 +109,13 @@ statement = {expression}expression_stmt |
             {selection}selection_stmt |
             {iteration}iteration_stmt |
             {return}return_stmt;
+            
+statement_else = {selse}selection_stmt_else |
+                 {expression}expression_stmt |
+                 {return}return_stmt |
+                 {compound}compound_stmt   ;   
+                 
+              //   {iteration}iteration_stmt  ;   
 
 expression_stmt= expression scolon |
                  {scolon}scolon;
@@ -116,12 +123,18 @@ expression_stmt= expression scolon |
 statement_list = statement_list statement |
                  {empty};                 
                  
-compound_stmt = open_brace local_declaration statement_list close_brace ;         
+compound_stmt = open_brace local_declaration statement_list close_brace ; 
 
-selection_stmt = {if}if lpar simple_expression rpar statement  ;
-               //  {ifelse}if lpar simple_expression rpar statement else statement2;
+        
+
+selection_stmt = {if}if lpar simple_expression rpar statement |
+                 {ifelse}if lpar simple_expression rpar statement_else else statement;
                  
-statement2 = statement;                         
+selection_stmt_else = {ifelse}if lpar simple_expression rpar statement_else else statement_else2;                 
+
+              
+                 
+statement_else2 = statement_else;                         
 
 iteration_stmt = while lpar simple_expression rpar statement;
 

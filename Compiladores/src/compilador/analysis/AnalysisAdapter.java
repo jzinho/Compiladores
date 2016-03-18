@@ -231,6 +231,30 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseASelseStatementElse(ASelseStatementElse node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpressionStatementElse(AExpressionStatementElse node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAReturnStatementElse(AReturnStatementElse node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACompoundStatementElse(ACompoundStatementElse node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAExpressionStmt(AExpressionStmt node)
     {
         defaultCase(node);
@@ -267,7 +291,19 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAStatement2(AStatement2 node)
+    public void caseAIfelseSelectionStmt(AIfelseSelectionStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIfelseSelectionStmtElse(AIfelseSelectionStmtElse node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAStatementElse2(AStatementElse2 node)
     {
         defaultCase(node);
     }
