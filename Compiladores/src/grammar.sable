@@ -78,7 +78,7 @@ decl = {variable} var_decl |
        {function} fun_decl;
 
 var_decl = {single}type_decl t_id scolon |
-           {comp}type_decl t_id lsbrack t_num rsbrack;
+           {comp}type_decl t_id lsbrack integer_number rsbrack scolon;
 
 type_decl = {val}type_valored |
             {not}type_not;

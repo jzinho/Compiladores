@@ -188,13 +188,17 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseACompVarDecl(ACompVarDecl node)
     {
         inACompVarDecl(node);
+        if(node.getScolon() != null)
+        {
+            node.getScolon().apply(this);
+        }
         if(node.getRsbrack() != null)
         {
             node.getRsbrack().apply(this);
         }
-        if(node.getTNum() != null)
+        if(node.getIntegerNumber() != null)
         {
-            node.getTNum().apply(this);
+            node.getIntegerNumber().apply(this);
         }
         if(node.getLsbrack() != null)
         {

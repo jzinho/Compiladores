@@ -200,13 +200,17 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getLsbrack().apply(this);
         }
-        if(node.getTNum() != null)
+        if(node.getIntegerNumber() != null)
         {
-            node.getTNum().apply(this);
+            node.getIntegerNumber().apply(this);
         }
         if(node.getRsbrack() != null)
         {
             node.getRsbrack().apply(this);
+        }
+        if(node.getScolon() != null)
+        {
+            node.getScolon().apply(this);
         }
         outACompVarDecl(node);
     }
