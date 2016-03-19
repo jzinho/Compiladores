@@ -744,9 +744,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAIterationStatementElse(AIterationStatementElse node)
     {
         inAIterationStatementElse(node);
-        if(node.getIterationStmt() != null)
+        if(node.getIterationElse() != null)
         {
-            node.getIterationStmt().apply(this);
+            node.getIterationElse().apply(this);
         }
         outAIterationStatementElse(node);
     }
@@ -1041,20 +1041,57 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAStatementElse2(node);
     }
 
-    public void inANoelseIterationStmt(ANoelseIterationStmt node)
+    public void inAElseIterationStmt(AElseIterationStmt node)
     {
         defaultIn(node);
     }
 
-    public void outANoelseIterationStmt(ANoelseIterationStmt node)
+    public void outAElseIterationStmt(AElseIterationStmt node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseANoelseIterationStmt(ANoelseIterationStmt node)
+    public void caseAElseIterationStmt(AElseIterationStmt node)
     {
-        inANoelseIterationStmt(node);
+        inAElseIterationStmt(node);
+        if(node.getStatement() != null)
+        {
+            node.getStatement().apply(this);
+        }
+        if(node.getRpar() != null)
+        {
+            node.getRpar().apply(this);
+        }
+        if(node.getSimpleExpression() != null)
+        {
+            node.getSimpleExpression().apply(this);
+        }
+        if(node.getLpar() != null)
+        {
+            node.getLpar().apply(this);
+        }
+        if(node.getWhile() != null)
+        {
+            node.getWhile().apply(this);
+        }
+        outAElseIterationStmt(node);
+    }
+
+    public void inANoelseIterationElse(ANoelseIterationElse node)
+    {
+        defaultIn(node);
+    }
+
+    public void outANoelseIterationElse(ANoelseIterationElse node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseANoelseIterationElse(ANoelseIterationElse node)
+    {
+        inANoelseIterationElse(node);
         if(node.getStatementElse() != null)
         {
             node.getStatementElse().apply(this);
@@ -1075,7 +1112,7 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getWhile().apply(this);
         }
-        outANoelseIterationStmt(node);
+        outANoelseIterationElse(node);
     }
 
     public void inAReturn1ReturnStmt(AReturn1ReturnStmt node)

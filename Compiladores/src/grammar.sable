@@ -116,7 +116,7 @@ statement = {expression}expression_stmt |
 statement_else = {selse}selection_stmt_else |
                  {expression}expression_stmt |
                  {compound}compound_stmt     | 
-                 {iteration}iteration_stmt  |
+                 {iteration}iteration_else  |
                  {return}return_stmt ;   
 
 expression_stmt= expression scolon |
@@ -138,7 +138,8 @@ selection_stmt_else = {ifelse}if lpar simple_expression rpar statement_else else
                  
 statement_else2 = statement_else;                         
 
-iteration_stmt = {noelse} while lpar simple_expression rpar statement_else;
+iteration_stmt = {else} while lpar simple_expression rpar statement;
+iteration_else = {noelse} while lpar simple_expression rpar statement_else;
 
 
 

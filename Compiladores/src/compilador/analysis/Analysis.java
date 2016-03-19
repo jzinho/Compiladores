@@ -53,7 +53,8 @@ public interface Analysis extends Switch
     void caseAIfelseSelectionStmt(AIfelseSelectionStmt node);
     void caseAIfelseSelectionStmtElse(AIfelseSelectionStmtElse node);
     void caseAStatementElse2(AStatementElse2 node);
-    void caseANoelseIterationStmt(ANoelseIterationStmt node);
+    void caseAElseIterationStmt(AElseIterationStmt node);
+    void caseANoelseIterationElse(ANoelseIterationElse node);
     void caseAReturn1ReturnStmt(AReturn1ReturnStmt node);
     void caseAReturn2ReturnStmt(AReturn2ReturnStmt node);
     void caseAComparationExpression(AComparationExpression node);

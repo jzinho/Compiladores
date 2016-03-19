@@ -321,7 +321,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseANoelseIterationStmt(ANoelseIterationStmt node)
+    public void caseAElseIterationStmt(AElseIterationStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANoelseIterationElse(ANoelseIterationElse node)
     {
         defaultCase(node);
     }
