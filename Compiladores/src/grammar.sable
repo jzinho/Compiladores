@@ -22,7 +22,7 @@ Tokens
   string = 'string';
   int = 'int';
   integer_number = digito;
-  t_id = id;
+ 
   t_num = num;
   comment_line = '//'[any_char - [lf + cr]]*;
   comment_block = '/*' not_star* '*'+ (not_star_slash not_star* '*'+)* '/';
@@ -31,6 +31,7 @@ Tokens
   return = 'return';
   void = 'void';
   while = 'while';
+  t_id = id;
   
   //Símbolos
   open_brace = '{';
@@ -68,7 +69,7 @@ comment_block;
 
 Productions
 
-program = {decl_list} decl_list;
+program = decl_list;
 
 decl_list = {sequence}decl_list decl|
             {single} decl;
@@ -76,34 +77,34 @@ decl_list = {sequence}decl_list decl|
 decl = {variable} var_decl |
        {function} fun_decl;
 
-var_decl = type_decl var_decl_id scolon;
+var_decl = {single}type_decl t_id scolon |
+           {comp}type_decl t_id lsbrack t_num rsbrack;
 
-type_decl = {int} integer_number |
-            {void} void;
+type_decl = {val}type_valored |
+            {not}type_not;
             
-var_decl_id = {id} t_id |
-              {bracks} t_id lsbrack t_num rsbrack;
-              
+type_valored = {int} int|
+               {string} string;
 
-fun_decl = {type} aux t_id lpar params rpar statement;
+type_not = void;            
+            
+
+fun_decl =  type_decl t_id lpar params rpar statement;
           
            
-aux = type_decl | 
-       {empty};           
+        
 
 params = {p_list} param_list |
-         {empty};
+         {void} void;
 
-param_list= {p_listparam}param_list scolon param_type |
-            {param} param_type ;
+param_list= {comp} param_list comma param |
+            {single} param ;
 
-param_type = {type_decl} type_decl param_id_list;
+param = {normal}type_decl t_id |
+        {bracks}type_decl t_id lsbrack rsbrack;
+        
+compound_stmt = open_brace local_declaration statement_list close_brace ;         
 
-param_id_list = {idlist}param_id_list comma param_id |
-                {paramid}param_id;
-
-param_id = {without}t_id |
-           {with}t_id lsbrack rsbrack ;
            
 //Statement
 
@@ -124,11 +125,7 @@ expression_stmt= expression scolon |
 
 statement_list = statement_list statement |
                  {empty};                 
-                 
-compound_stmt = open_brace local_declaration statement_list close_brace ; 
-
-        
-
+                  
 selection_stmt = {if}if lpar simple_expression rpar statement |
                  {ifelse}if lpar simple_expression rpar statement_else else statement;
                  
@@ -169,7 +166,8 @@ factor = {mul}mutable |
 
 
 mutable = {single}t_id |
-      {idexpression}t_id lsbrack expression rsbrack;
+      {idexpression}t_id lsbrack expression rsbrack|
+       {number}integer_number;
       
 immutable = {expression} lpar expression rpar |
             {call} call| 

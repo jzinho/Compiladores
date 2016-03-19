@@ -46,6 +46,6 @@ public class Main {
 		
 		Parser p = new Parser(lexer);
 		Start ast = p.parse();
-        System.out.println("Analise sintática bem sucedida");
+        System.out.println("Análise sintática bem sucedida !");
 	}
 }

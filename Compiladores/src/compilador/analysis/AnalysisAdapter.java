@@ -75,7 +75,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseADeclListProgram(ADeclListProgram node)
+    public void caseAProgram(AProgram node)
     {
         defaultCase(node);
     }
@@ -105,49 +105,49 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAVarDecl(AVarDecl node)
+    public void caseASingleVarDecl(ASingleVarDecl node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAIntTypeDecl(AIntTypeDecl node)
+    public void caseACompVarDecl(ACompVarDecl node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAVoidTypeDecl(AVoidTypeDecl node)
+    public void caseAValTypeDecl(AValTypeDecl node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAIdVarDeclId(AIdVarDeclId node)
+    public void caseANotTypeDecl(ANotTypeDecl node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABracksVarDeclId(ABracksVarDeclId node)
+    public void caseAIntTypeValored(AIntTypeValored node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATypeFunDecl(ATypeFunDecl node)
+    public void caseAStringTypeValored(AStringTypeValored node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAAux(AAux node)
+    public void caseATypeNot(ATypeNot node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAEmptyAux(AEmptyAux node)
+    public void caseAFunDecl(AFunDecl node)
     {
         defaultCase(node);
     }
@@ -159,49 +159,37 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAEmptyParams(AEmptyParams node)
+    public void caseAVoidParams(AVoidParams node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAPListparamParamList(APListparamParamList node)
+    public void caseACompParamList(ACompParamList node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAParamParamList(AParamParamList node)
+    public void caseASingleParamList(ASingleParamList node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATypeDeclParamType(ATypeDeclParamType node)
+    public void caseANormalParam(ANormalParam node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAIdlistParamIdList(AIdlistParamIdList node)
+    public void caseABracksParam(ABracksParam node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAParamidParamIdList(AParamidParamIdList node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAWithoutParamId(AWithoutParamId node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAWithParamId(AWithParamId node)
+    public void caseACompoundStmt(ACompoundStmt node)
     {
         defaultCase(node);
     }
@@ -286,12 +274,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAEmptyStatementList(AEmptyStatementList node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseACompoundStmt(ACompoundStmt node)
     {
         defaultCase(node);
     }
@@ -435,6 +417,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseANumberMutable(ANumberMutable node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAExpressionImmutable(AExpressionImmutable node)
     {
         defaultCase(node);
@@ -573,12 +561,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTTId(TTId node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseTTNum(TTNum node)
     {
         defaultCase(node);
@@ -622,6 +604,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTWhile(TWhile node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTTId(TTId node)
     {
         defaultCase(node);
     }
