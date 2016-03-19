@@ -141,7 +141,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseANotypeFunDecl(ANotypeFunDecl node)
+    public void caseAAux(AAux node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEmptyAux(AEmptyAux node)
     {
         defaultCase(node);
     }
@@ -243,13 +249,19 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAReturnStatementElse(AReturnStatementElse node)
+    public void caseACompoundStatementElse(ACompoundStatementElse node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseACompoundStatementElse(ACompoundStatementElse node)
+    public void caseAIterationStatementElse(AIterationStatementElse node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAReturnStatementElse(AReturnStatementElse node)
     {
         defaultCase(node);
     }
@@ -309,7 +321,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAIterationStmt(AIterationStmt node)
+    public void caseANoelseIterationStmt(ANoelseIterationStmt node)
     {
         defaultCase(node);
     }

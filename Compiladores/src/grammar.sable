@@ -85,8 +85,11 @@ var_decl_id = {id} t_id |
               {bracks} t_id lsbrack t_num rsbrack;
               
 
-fun_decl = {type} type_decl t_id lpar params rpar statement |
-           {notype} t_id lpar params rpar statement ;
+fun_decl = {type} aux t_id lpar params rpar statement;
+          
+           
+aux = type_decl | 
+       {empty};           
 
 params = {p_list} param_list |
          {empty};
@@ -112,10 +115,9 @@ statement = {expression}expression_stmt |
             
 statement_else = {selse}selection_stmt_else |
                  {expression}expression_stmt |
-                 {return}return_stmt |
-                 {compound}compound_stmt   ;   
-                 
-              //   {iteration}iteration_stmt  ;   
+                 {compound}compound_stmt     | 
+                 {iteration}iteration_stmt  |
+                 {return}return_stmt ;   
 
 expression_stmt= expression scolon |
                  {scolon}scolon;
@@ -136,7 +138,9 @@ selection_stmt_else = {ifelse}if lpar simple_expression rpar statement_else else
                  
 statement_else2 = statement_else;                         
 
-iteration_stmt = while lpar simple_expression rpar statement;
+iteration_stmt = {noelse} while lpar simple_expression rpar statement_else;
+
+
 
 return_stmt =  {return1} return scolon |
                {return2}return expression scolon;

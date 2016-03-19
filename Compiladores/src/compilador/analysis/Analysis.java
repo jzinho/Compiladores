@@ -23,7 +23,8 @@ public interface Analysis extends Switch
     void caseAIdVarDeclId(AIdVarDeclId node);
     void caseABracksVarDeclId(ABracksVarDeclId node);
     void caseATypeFunDecl(ATypeFunDecl node);
-    void caseANotypeFunDecl(ANotypeFunDecl node);
+    void caseAAux(AAux node);
+    void caseAEmptyAux(AEmptyAux node);
     void caseAPListParams(APListParams node);
     void caseAEmptyParams(AEmptyParams node);
     void caseAPListparamParamList(APListparamParamList node);
@@ -40,8 +41,9 @@ public interface Analysis extends Switch
     void caseAReturnStatement(AReturnStatement node);
     void caseASelseStatementElse(ASelseStatementElse node);
     void caseAExpressionStatementElse(AExpressionStatementElse node);
-    void caseAReturnStatementElse(AReturnStatementElse node);
     void caseACompoundStatementElse(ACompoundStatementElse node);
+    void caseAIterationStatementElse(AIterationStatementElse node);
+    void caseAReturnStatementElse(AReturnStatementElse node);
     void caseAExpressionStmt(AExpressionStmt node);
     void caseAScolonExpressionStmt(AScolonExpressionStmt node);
     void caseAStatementList(AStatementList node);
@@ -51,7 +53,7 @@ public interface Analysis extends Switch
     void caseAIfelseSelectionStmt(AIfelseSelectionStmt node);
     void caseAIfelseSelectionStmtElse(AIfelseSelectionStmtElse node);
     void caseAStatementElse2(AStatementElse2 node);
-    void caseAIterationStmt(AIterationStmt node);
+    void caseANoelseIterationStmt(ANoelseIterationStmt node);
     void caseAReturn1ReturnStmt(AReturn1ReturnStmt node);
     void caseAReturn2ReturnStmt(AReturn2ReturnStmt node);
     void caseAComparationExpression(AComparationExpression node);

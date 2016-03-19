@@ -42,7 +42,7 @@ public class Main {
 	               new FileReader(args[0]), 1024)); 
 		Main main = new Main();
 		
-		main.AnaliseLexica(args[0], lexer);
+		//main.AnaliseLexica(args[0], lexer);
 		
 		Parser p = new Parser(lexer);
 		Start ast = p.parse();

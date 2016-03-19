@@ -284,9 +284,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseATypeFunDecl(ATypeFunDecl node)
     {
         inATypeFunDecl(node);
-        if(node.getTypeDecl() != null)
+        if(node.getAux() != null)
         {
-            node.getTypeDecl().apply(this);
+            node.getAux().apply(this);
         }
         if(node.getTId() != null)
         {
@@ -311,41 +311,42 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outATypeFunDecl(node);
     }
 
-    public void inANotypeFunDecl(ANotypeFunDecl node)
+    public void inAAux(AAux node)
     {
         defaultIn(node);
     }
 
-    public void outANotypeFunDecl(ANotypeFunDecl node)
+    public void outAAux(AAux node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseANotypeFunDecl(ANotypeFunDecl node)
+    public void caseAAux(AAux node)
     {
-        inANotypeFunDecl(node);
-        if(node.getTId() != null)
+        inAAux(node);
+        if(node.getTypeDecl() != null)
         {
-            node.getTId().apply(this);
+            node.getTypeDecl().apply(this);
         }
-        if(node.getLpar() != null)
-        {
-            node.getLpar().apply(this);
-        }
-        if(node.getParams() != null)
-        {
-            node.getParams().apply(this);
-        }
-        if(node.getRpar() != null)
-        {
-            node.getRpar().apply(this);
-        }
-        if(node.getStatement() != null)
-        {
-            node.getStatement().apply(this);
-        }
-        outANotypeFunDecl(node);
+        outAAux(node);
+    }
+
+    public void inAEmptyAux(AEmptyAux node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAEmptyAux(AEmptyAux node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAEmptyAux(AEmptyAux node)
+    {
+        inAEmptyAux(node);
+        outAEmptyAux(node);
     }
 
     public void inAPListParams(APListParams node)
@@ -708,27 +709,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAExpressionStatementElse(node);
     }
 
-    public void inAReturnStatementElse(AReturnStatementElse node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAReturnStatementElse(AReturnStatementElse node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAReturnStatementElse(AReturnStatementElse node)
-    {
-        inAReturnStatementElse(node);
-        if(node.getReturnStmt() != null)
-        {
-            node.getReturnStmt().apply(this);
-        }
-        outAReturnStatementElse(node);
-    }
-
     public void inACompoundStatementElse(ACompoundStatementElse node)
     {
         defaultIn(node);
@@ -748,6 +728,48 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getCompoundStmt().apply(this);
         }
         outACompoundStatementElse(node);
+    }
+
+    public void inAIterationStatementElse(AIterationStatementElse node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAIterationStatementElse(AIterationStatementElse node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAIterationStatementElse(AIterationStatementElse node)
+    {
+        inAIterationStatementElse(node);
+        if(node.getIterationStmt() != null)
+        {
+            node.getIterationStmt().apply(this);
+        }
+        outAIterationStatementElse(node);
+    }
+
+    public void inAReturnStatementElse(AReturnStatementElse node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAReturnStatementElse(AReturnStatementElse node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAReturnStatementElse(AReturnStatementElse node)
+    {
+        inAReturnStatementElse(node);
+        if(node.getReturnStmt() != null)
+        {
+            node.getReturnStmt().apply(this);
+        }
+        outAReturnStatementElse(node);
     }
 
     public void inAExpressionStmt(AExpressionStmt node)
@@ -1019,20 +1041,20 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAStatementElse2(node);
     }
 
-    public void inAIterationStmt(AIterationStmt node)
+    public void inANoelseIterationStmt(ANoelseIterationStmt node)
     {
         defaultIn(node);
     }
 
-    public void outAIterationStmt(AIterationStmt node)
+    public void outANoelseIterationStmt(ANoelseIterationStmt node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAIterationStmt(AIterationStmt node)
+    public void caseANoelseIterationStmt(ANoelseIterationStmt node)
     {
-        inAIterationStmt(node);
+        inANoelseIterationStmt(node);
         if(node.getWhile() != null)
         {
             node.getWhile().apply(this);
@@ -1049,11 +1071,11 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getRpar().apply(this);
         }
-        if(node.getStatement() != null)
+        if(node.getStatementElse() != null)
         {
-            node.getStatement().apply(this);
+            node.getStatementElse().apply(this);
         }
-        outAIterationStmt(node);
+        outANoelseIterationStmt(node);
     }
 
     public void inAReturn1ReturnStmt(AReturn1ReturnStmt node)
