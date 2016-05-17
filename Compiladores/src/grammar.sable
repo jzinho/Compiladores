@@ -90,8 +90,8 @@ type_var {->typevar}
 	;
 	
 comp_decl {-> comp}
-		= lsbrack expression rsbrack {-> New comp.dim(expression)}
-		;	
+	= lsbrack expression rsbrack {-> New comp.dim(expression)}
+	;	
 
 type_decl {->type}
 	= {val}[type]:type_valored {-> type.type} 
@@ -250,18 +250,17 @@ program
 	;
 
 decl
-		
-		= {function} type id statement*
-		| {main_func} type main statement*
-		| {variable} type typevar
-		| {fun_decl} type id param* statement*
-		;
+	= {function} type id statement*
+	| {main_func} type main statement*
+	| {variable} type typevar
+	| {fun_decl} type id param* statement*
+	;
 
 type 
-		= {int} int
-		| {string} string
-		| {void} void
-		;
+	= {int} int
+	| {string} string
+	| {void} void
+	;
 		
 param
 	= {decl_param} type id 
