@@ -8,6 +8,6 @@ else return gdc (v, u-u/v-v);
 
 void main (void)
 { int x; int y;
-x = input (); y = input();
-output (gdc(x,y));
+/*x = input (); y = input(); */
+/*output (gdc(x,y)); */
 }
