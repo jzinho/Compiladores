@@ -4,8 +4,6 @@ Helpers
    any_char      = [0x0 .. 0xfff];
    digito        = ['0' .. '9'];
    letra       = [['a' .. 'z'] + ['A' .. 'Z']];
-   id = letra letra*;
-   num = digito digito*;
    cr  = 13;
    lf  = 10;
    tab = 9;
@@ -15,182 +13,307 @@ Helpers
    not_star = [any_char - '*'];
    not_star_slash = [not_star - '/'];
    
+States
+  normal, comentario;
   
 Tokens 
-   //Identificadores
-  blank   = branco;
-  string = 'string';
-  int = 'int';
-  integer_number = digito;
- 
-  t_num = num;
-  comment_line = '//'[any_char - [lf + cr]]*;
-  comment_block = '/*' not_star* '*'+ (not_star_slash not_star* '*'+)* '/';
-  if ='if';
-  else ='else';
-  return = 'return';
-  void = 'void';
-  while = 'while';
-  t_id = id;
-  
-  //Símbolos
-  open_brace = '{';
-  close_brace = '}';
-  lsbrack = '[';
-  rsbrack = ']';
-  lpar = '(';
-  rpar = ')';
-  comma  = ',';
-  scolon   = ';';
-  atrib = ':=';
-  colon = ':';
-  div = '/';
-  plus  = '+';
-  minus = '-';
-  times = '*';
-  mod = '%';
-  greater = '>';
-  less = '<';
-  gequal = '>=';
-  lequal = '<=';
-  not = '!';
-  and = 'and';
-  or = 'or';
-  xor = 'xor';
-  diff   = '!=';
-  equal    = '=';
-  equalequal    = '==';
-  identifier = letra ( digito | letra )*;
+ //Identificadores
+{normal}  input   = 'input';
+{normal}  output   = 'output';
+{normal}  blank   = branco;
+{normal}  string = 'string';
+{normal}  int = 'int';
+//{normal}  integer_number = digito;
+{normal}  comment_line = '//'[any_char - [lf + cr]]*;
+	comment_block = '/*' not_star* '*'+ (not_star_slash not_star* '*'+)* '/';
+{normal}  if ='if';
+{normal}  else ='else';
+{normal}  return = 'return';
+{normal}  void = 'void';
+{normal}  while = 'while';
+{normal}  open_brace = '{';
+{normal}  close_brace = '}';
+{normal}  lsbrack = '[';
+{normal}  rsbrack = ']';
+{normal}  lpar = '(';
+{normal}  rpar = ')';
+{normal}  comma  = ',';
+{normal}  scolon   = ';';
+{normal}  atrib = ':=';
+{normal}  colon = ':';
+{normal}  div = '/';
+{normal}  plus  = '+';
+{normal}  minus = '-';
+{normal}  times = '*';
+{normal}  mod = '%';
+{normal}  greater = '>';
+{normal}  less = '<';
+{normal}  gequal = '>=';
+{normal}  lequal = '<=';
+{normal}  not = '!';
+{normal}  and = 'and';
+{normal}  or = 'or';
+{normal}  xor = 'xor';
+{normal}  diff   = '!=';
+{normal}  equal    = '=';
+{normal}  equalequal    = '==';
+{normal} main = 'main';
+{normal} id = letra+;
+{normal} num = digito+;
     
 Ignored Tokens
-comment_line,
-blank,
-comment_block;
+blank,comment_line,
+comment_block ;
 
 Productions
 
-program = decl_list;
+program 
+	= decl* decl_main {-> New program([decl.decl, decl_main.decl])} 
+	;
+	
+decl_main {->decl}
+	= {main} [type]:type_decl [id]:main lpar void rpar [statement]:compound_stmt {-> New decl.main_func(type.type, id, [statement.statement])}
+	;
+	
+decl {->decl}
+	= {var} [var]:var_decl {-> var.decl} 
+	| {function} [function]:fun_decl {-> function.decl}
+	;
 
-decl_list = {sequence}decl_list decl|
-            {single} decl;
+var_decl {->decl}
+	= {variable} [type]:type_decl [var]:type_var scolon {->New decl.variable(type.type, var.typevar)}
+	;	
 
-decl = {variable} var_decl |
-       {function} fun_decl;
+type_var {->typevar}
+	= {single} id  {-> New typevar.single(id)}
+	| {comp} id [comp]:comp_decl+ {-> New typevar.comp(id, [comp.comp])}
+	;
+	
+comp_decl {-> comp}
+		= lsbrack expression rsbrack {-> New comp.dim(expression)}
+		;	
 
-var_decl = {single}type_decl t_id scolon |
-           {comp}type_decl t_id lsbrack integer_number rsbrack scolon;
-
-type_decl = {val}type_valored |
-            {not}type_not;
+type_decl {->type}
+	= {val}[type]:type_valored {-> type.type} 
+	| {not}[type]:type_not {-> type.type}
+	;
             
-type_valored = {int} int|
-               {string} string;
+type_valored {-> type} 
+	= {int} int {-> New type.int(int)}
+	| {string} string {-> New type.string(string)}
+	;
 
-type_not = void;            
+type_not {-> type}
+	= {void} void {-> New type.void(void)}
+	;            
             
-
-fun_decl =  type_decl t_id lpar params rpar statement;
+fun_decl {-> decl}
+	=  {args}[type]:type_decl id lpar params rpar [statement]:compound_stmt {-> New decl.fun_decl(type.type, id, [params.param], [statement.statement])} 
+	;
           
-           
+params {->param*}
+	= {param_list} param_list {-> [param_list.param]}
+	| {void} void {->[New param.param_void(void)]}
+	;
+
+param_list {->param*}
+	= {sequence} [sequence]:param_list comma [single]:param {-> [sequence.param, single.param]}
+	| {single} [single]:param  {-> [single.param]}
+	;
+
+param {->param}
+	= {normal}[type]:type_decl id {-> New param.decl_param(type.type, id)}
+	| {bracks}[type]:type_decl id lsbrack rsbrack {-> New param.decl_param(type.type, id)}
+	;
         
-
-params = {p_list} param_list |
-         {void} void;
-
-param_list= {comp} param_list comma param |
-            {single} param ;
-
-param = {normal}type_decl t_id |
-        {bracks}type_decl t_id lsbrack rsbrack;
-        
-compound_stmt = open_brace local_declaration statement_list close_brace ;         
-
-           
-//Statement
-
-statement = {expression}expression_stmt |
-            {compound}compound_stmt |
-            {selection}selection_stmt |
-            {iteration}iteration_stmt |
-            {return}return_stmt;
+statement {-> statement}
+	= {expression}expression_stmt  {-> expression_stmt.statement}
+	| {compound}compound_stmt  {-> compound_stmt.statement}
+	| {selection}selection_stmt  {-> selection_stmt.statement}
+	| {iteration}iteration_stmt  {-> iteration_stmt.statement}
+	| {return}return_stmt {-> return_stmt.statement}
+	;
             
-statement_else = {selse}selection_stmt_else |
-                 {expression}expression_stmt |
-                 {compound}compound_stmt     | 
-                 {iteration}iteration_else  |
-                 {return}return_stmt ;   
+statement_else {-> statement}
+	= {selse}selection_stmt_else {-> selection_stmt_else.statement}
+	| {expression}expression_stmt {-> expression_stmt.statement}
+	| {compound}compound_stmt {-> compound_stmt.statement}
+	| {iteration}iteration_else {-> iteration_else.statement}
+	| {return}return_stmt  {-> return_stmt.statement}
+	;   
 
-expression_stmt= expression scolon |
-                 {scolon}scolon;
+expression_stmt {-> statement}
+	= expression scolon {-> New statement.stmt_expr(expression)}
+	| {empty} scolon    {-> New statement.empty()}
+	;
 
-statement_list = statement_list statement |
-                 {empty};                 
+statement_list {-> statement*}
+	= statement_list statement {-> [statement_list.statement, statement.statement]}
+	| {empty}  {-> [New statement.empty()]}
+	;                 
                   
-selection_stmt = {if}if lpar simple_expression rpar statement |
-                 {ifelse}if lpar simple_expression rpar statement_else else statement;
+selection_stmt {-> statement}
+	= {if}if lpar exp_logic rpar statement {-> New statement.stmt_select_if(exp_logic, statement)}
+	| {ifelse}if lpar exp_logic rpar [st1]:statement_else else [st2]:statement {-> New statement.stmt_select_if_else(exp_logic,st1.statement, st2.statement)}
+	;
+
+compound_stmt {-> statement}
+	= open_brace [var2]:var_decl* [st_list]:statement_list close_brace {-> New statement.comp_stmt([var2.decl] ,[st_list.statement])}
+	;         
                  
-selection_stmt_else = {ifelse}if lpar simple_expression rpar statement_else else statement_else2;                 
+selection_stmt_else {-> statement}
+	= {ifelse}if lpar exp_logic rpar [st1]:statement_else else [st2]:statement_else {-> New statement.stmt_select_if_else(exp_logic,st1.statement, st2.statement)}
+	;                 
 
-              
-                 
-statement_else2 = statement_else;                         
+iteration_stmt {-> statement}
+	= {else} while lpar exp_logic rpar statement {->New statement.iteration (exp_logic,statement)}
+	;
+	
+iteration_else {-> statement}
+	= {noelse} while lpar exp_logic rpar [st]:statement_else {->New statement.iteration (exp_logic,st.statement)}
+	;
 
-iteration_stmt = {else} while lpar simple_expression rpar statement;
-iteration_else = {noelse} while lpar simple_expression rpar statement_else;
+return_stmt {-> statement}
+	=  {empty} return scolon {-> New statement.empty()}
+	|  {return2}return expression scolon {-> New statement.stmt_return(expression)}
+	;
 
+expression {-> expression}
+	= {not_att} not_att {-> not_att.expression}
+	| {att} id equal [exp1]:expression {-> New expression.att(id,exp1.expression)}
+	;
 
+not_att {-> expression}
+	= {exp_logic} [expression]:exp_logic {->New expression.exp_logic(expression)}
+	| {exp_arith} [expression]:exp_arith {->New expression.exp_arith(expression)}
+	;
 
-return_stmt =  {return1} return scolon |
-               {return2}return expression scolon;
-
-expression = {comparation} mutable equal expression |
-             {add}simple_expression;
-
-local_declaration = local_declaration var_decl |
-                     {empty};
-
-simple_expression = {a1} add_exp rel_op add_exp2|
-                    {single} add_exp;
-                    
-add_exp2 = add_exp;                   
-                    
-add_exp = {addterm}add_exp add_op term |
-          {term} term;                  
-
-
-term = {termfactor}term mult_op factor |
-       {factor}factor;
+exp_logic {-> exp_logic}
+	=  {diff}[left]:exp_arith diff [right]:exp_arith {-> New exp_logic.diff(left.exp_arith, right.exp_arith)}
+	|  {equal}[left]:exp_arith equalequal [right]:exp_arith {-> New exp_logic.equalequal(left.exp_arith, right.exp_arith)}
+	|  {greater}[left]:exp_arith greater [right]:exp_arith {-> New exp_logic.greater(left.exp_arith, right.exp_arith)}
+	|  {less}[left]:exp_arith less [right]:exp_arith {-> New exp_logic.less(left.exp_arith, right.exp_arith)}
+	|  {gequal}[left]:exp_arith gequal [right]:exp_arith {-> New exp_logic.gequal(left.exp_arith, right.exp_arith)}
+	|  {lequal}[left]:exp_arith lequal [right]:exp_arith {-> New exp_logic.lequal(left.exp_arith, right.exp_arith)}
+	;
+	                     
+exp_arith {-> exp_arith}    
+    = {plus} [left]:exp_arith plus term {->New exp_arith.plus(left.exp_arith, term.exp_arith)}
+	| {minus} [left]:exp_arith minus term {->New exp_arith.minus(left.exp_arith, term.exp_arith)}
+	| {term} term {->term.exp_arith}
+	;
+	                 
+term {->exp_arith}
+	= {times} term times factor {-> New exp_arith.times(term.exp_arith,factor.exp_arith)}
+	| {div} term div factor {-> New exp_arith.div(term.exp_arith,factor.exp_arith)}
+	| {mod} term mod factor {-> New exp_arith.mod(term.exp_arith,factor.exp_arith)}
+	| {factor} factor {-> factor.exp_arith}
+	;
        
-factor = {mul}mutable |
-         {imul}immutable;
+factor {->exp_arith}
+	= {f_expression} lpar [exp1]:expression rpar {-> New exp_arith.expression(exp1.expression)}
+	| {f_variable} id  {-> New exp_arith.variable_f(id)}
+	| {call} call {->call.exp_arith}
+	| {num} num {-> New exp_arith.num(num)}
+	;
+	
+call {-> exp_arith}
+	= {call_func }id lpar args rpar {-> New exp_arith.call(id,[args.expression])}
+	//| {call_in} input lpar rpar {-> New statement.call_in(id)}
+	//| {call_out} output lpar expression rpar {-> New statement.call(id, [args.expression])}
+	;
+
+args {->expression*}
+	= {list} args_list {-> [args_list.expression]}
+	;
+	
+//variable {-> typevar}
+//		=  id comp_exp* {-> New type.comp(id, [comp_exp.comp])}
+//		;
+		
+//comp_exp {-> comp}
+//		= lsbrack expression rsbrack {-> New comp.dim(expression)}
+//		;
+
+args_list {->expression*}
+	= {listargs} [lst]:args_list comma expression {-> [expression,lst.expression]}
+	| {exp} expression {->[expression]}
+	;      
 
 
-mutable = {single}t_id |
-      {idexpression}t_id lsbrack expression rsbrack|
-       {number}integer_number;
-      
-immutable = {expression} lpar expression rpar |
-            {call} call| 
-            {num} t_num;      
-      
-call = t_id lpar args rpar;
+ 
+	
+Abstract Syntax Tree
 
-args = args_list | {empty};
+program
+	= decl+
+	;
 
-args_list = {listargs}args_list comma expression |
-            {expression}expression;      
+decl
+		
+		= {function} type id statement*
+		| {main_func} type main statement*
+		| {variable} type typevar
+		| {fun_decl} type id param* statement*
+		;
 
-rel_op =  {diff} diff |
-          {equal} equalequal |
-          {greater} greater |
-          {less} less |
-          {gequal} gequal |
-          {lequal} lequal ;
+type 
+		= {int} int
+		| {string} string
+		| {void} void
+		;
+		
+param
+	= {decl_param} type id 
+	| {param_void} void
+	;
+		
+typevar
+	= {single} id
+	| {comp}  id comp*
+	;
+	
+comp 
+	= {empty} id
+	| {dim} expression
+	;
+			
+statement 
+	= {stmt_expr} expression
+	| {stmt_return} expression
+	| {stmt_select_if} exp_logic statement
+	| {stmt_select_if_else} exp_logic [st1]:statement [st2]:statement
+	| {comp_stmt} decl* statement*
+	| {iteration} exp_logic statement
+	| {call} id expression
+	| {empty}
+	;
+	
+expression 
+	= {att} id expression
+	| {exp_arith} exp_arith
+	| {exp_logic} exp_logic
+	;
 
-add_op =  {plus} plus |
-          {minus} minus ;
-
-mult_op = {times} times |
-          {div} div |
-          {mod} mod;
-
+exp_logic 
+	=  {diff}[left]:exp_arith [right]:exp_arith
+	|  {equalequal}[left]:exp_arith  [right]:exp_arith
+	|  {greater}[left]:exp_arith [right]:exp_arith 
+	|  {less}[left]:exp_arith [right]:exp_arith
+	|  {gequal}[left]:exp_arith  [right]:exp_arith
+	|  {lequal}[left]:exp_arith  [right]:exp_arith
+	;
+		
+exp_arith
+	= {plus}  [left]:exp_arith [right]:exp_arith
+	| {minus} [left]:exp_arith [right]:exp_arith
+	| {times}  [left]:exp_arith [right]:exp_arith
+	| {div}   [left]:exp_arith [right]:exp_arith
+	| {mod}   [left]:exp_arith [right]:exp_arith
+	| {num}   num
+	| {variable_f}    id
+	| {typevar}  typevar
+	| {call} id expression*
+	| {expression} expression
+	;		
+	
